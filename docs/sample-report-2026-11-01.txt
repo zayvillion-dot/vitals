@@ -1,0 +1,98 @@
+vitals 0.1.0  Isaiahs-Mini  2026-11-01 14:03
+
+== Disk ==
+[OK] /System/Volumes/Data: 44.0 GB free, 80% used  (WARN <30 GB or >85% used; RED <15 GB or >92%)
+[n/a] ~/Library/Caches: du timed out (>5 s) or unreadable  (5 s limit)
+[n/a] ~/.Trash: du timed out (>5 s) or unreadable  (5 s limit)
+[OK] /private/tmp/claude-501: 1.3G  (WARN >= 10 GB)
+
+== Memory ==
+[OK] 8 GB physical, 51% free  (WARN <30% free; RED <15%)
+[RED] swap 4.0 GB of 5.0 GB used (80%)  (WARN >50% used; RED >75%)
+[OK] pageouts since boot: 2528357 pages  (info only)
+
+== CPU ==
+[OK] load 3.69 / 4.21 / 4.18 (1/5/15 min) on 8 cores  (WARN 1-min load > cores; RED > 2x cores)
+[OK] no thermal throttling (CPU_Speed_Limit=100)  (WARN <100)
+[OK] uptime 0 days  (WARN >7 days)
+
+== Processes ==
+[OK] top mem: claude pid 3338 cpu 0.3% mem 3.7% rss 306 MB up 19:12:10  (WARN single process >25% RAM)
+[OK] top mem: Code Helper (Renderer) pid 1309 cpu 0.3% mem 2.8% rss 226 MB up 19:13:22  (WARN single process >25% RAM)
+[OK] top mem: claude pid 3784 cpu 0.1% mem 2.2% rss 176 MB up 19:11:49  (WARN single process >25% RAM)
+[OK] top mem: Code Helper (Renderer) pid 953 cpu 0.0% mem 2.1% rss 174 MB up 19:13:23  (WARN single process >25% RAM)
+[OK] top mem: claude pid 3489 cpu 0.1% mem 2.1% rss 169 MB up 19:11:53  (WARN single process >25% RAM)
+[OK] top cpu: Python pid 96629 cpu 96.7% mem 1.1% rss 88 MB up 00:01  (info only)
+[OK] top cpu: fileproviderd pid 668 cpu 29.5% mem 0.4% rss 29 MB up 19:13:45  (info only)
+[OK] top cpu: cloudd pid 51901 cpu 16.5% mem 0.3% rss 26 MB up 01:38:50  (info only)
+[OK] process counts: claude 13, node 0, python 0, Code Helper 21  (info only)
+
+== iCloud ==
+[OK] brctl status: no blocked / SYNC DISABLED zones in first 50 lines (4 s partial scan; uninstalled-app zones ignored)  (RED any blocked / SYNC DISABLED)
+[RED] Luminate Electric: 45 dataless tracked files; fix: brctl download "/Users/isaiahbrooks/Documents/NXT Level Energy (NLE)/AI/Luminate Electric"  (RED any dataless)
+[OK] Luminate Electric: 0 dataless objects files  (RED any dataless)
+
+== Git ==
+[OK] no git process older than 10 min  (WARN > 10 min)
+[OK] Luminate Electric [quote/sideline-co15-co16] (R) dirty files: 17  (info only)
+[WARN] Luminate Electric: 2 git refs with broken names (Finder duplicates like 'name 2' in .git/refs); human removes after bundling  (WARN any broken ref)
+[WARN] Luminate Electric: branch quote/sideline-co15-co16 has 2 unpushed commits  (WARN ahead > 0)
+[WARN] Luminate Electric: branch worktree-site-pass-3 has 1 unpushed commits  (WARN ahead > 0)
+[WARN] Luminate Electric: 4 of 15 local branches have no upstream: session/eviction-recovery-luminate(0 not on any remote) session/lighting-web-fixes-1026(0 not on any remote) session/price-sheet-rev3(0 not on any remote) session/website-intake-redirect(1 not on any remote)  (WARN no upstream)
+[OK] voice-webhook-1015 [session/voice-webhook-1015] (W) dirty files: 0  (info only)
+[OK] wave1-followup [wave1-followup] (W) dirty files: 0  (info only)
+[OK] website-redirect [session/website-intake-redirect] (W) dirty files: 0  (info only)
+[RED] intake-form: git status hung (>5 s); likely dataless/evicted files: /Users/isaiahbrooks/Documents/NXT Level Energy (NLE)/AI/solar-dashboard-worktrees/intake-form  (RED > 5 s)
+[WARN] intake-form: branch session/discount-inline has 64 unpushed commits  (WARN ahead > 0)
+[WARN] intake-form: branch session/intake-form has 9 unpushed commits  (WARN ahead > 0)
+[WARN] intake-form: branch session/leg5c-nav-default has 3 unpushed commits  (WARN ahead > 0)
+[WARN] intake-form: branch session/lighting-ui has 1 unpushed commits  (WARN ahead > 0)
+[WARN] intake-form: branch session/money-tier1-r8 has 1 unpushed commits  (WARN ahead > 0)
+[WARN] intake-form: branch session/ovh0920-leg10-payprev has 18 unpushed commits  (WARN ahead > 0)
+[WARN] intake-form: branch session/quote-list-dates has 60 unpushed commits  (WARN ahead > 0)
+[WARN] intake-form: branch session/stripe-paid-1015 has 1 unpushed commits  (WARN ahead > 0)
+[WARN] intake-form: 81 of 144 local branches have no upstream: fix/pad-tint-blue(0 not on any remote) lighting-fix4-prose(0 not on any remote) lighting-fix4-r6f(0 not on any remote) lighting-fix4-scope(0 not on any remote) money-tier1-r7(0 not on any remote) native-scheduling(0 not on any remote)  (WARN no upstream)
+[RED] leg8-pricebook: git status hung (>5 s); likely dataless/evicted files: /Users/isaiahbrooks/Documents/NXT Level Energy (NLE)/AI/solar-dashboard-worktrees/leg8-pricebook  (RED > 5 s)
+[OK] lighting-fix4 [session/lighting-workspace] (W) dirty files: 7  (info only)
+[RED] lighting-fix4-mainbase: git status hung (>5 s); likely dataless/evicted files: /Users/isaiahbrooks/Documents/NXT Level Energy (NLE)/AI/solar-dashboard-worktrees/lighting-fix4-mainbase  (RED > 5 s)
+[RED] lighting-fix4-prose: git status hung (>5 s); likely dataless/evicted files: /Users/isaiahbrooks/Documents/NXT Level Energy (NLE)/AI/solar-dashboard-worktrees/lighting-fix4-prose  (RED > 5 s)
+[RED] lighting-fix4-r6f: git status hung (>5 s); likely dataless/evicted files: /Users/isaiahbrooks/Documents/NXT Level Energy (NLE)/AI/solar-dashboard-worktrees/lighting-fix4-r6f  (RED > 5 s)
+[RED] lighting-fix4-review: git status hung (>5 s); likely dataless/evicted files: /Users/isaiahbrooks/Documents/NXT Level Energy (NLE)/AI/solar-dashboard-worktrees/lighting-fix4-review  (RED > 5 s)
+[RED] lighting-fix4-scope: git status hung (>5 s); likely dataless/evicted files: /Users/isaiahbrooks/Documents/NXT Level Energy (NLE)/AI/solar-dashboard-worktrees/lighting-fix4-scope  (RED > 5 s)
+[OK] lighting-ui [session/lighting-ui] (W) dirty files: 0  (info only)
+[RED] mobile-ipad-sweep: git status hung (>5 s); likely dataless/evicted files: /Users/isaiahbrooks/Documents/NXT Level Energy (NLE)/AI/solar-dashboard-worktrees/mobile-ipad-sweep  (RED > 5 s)
+[RED] money-tier1-r8: git status hung (>5 s); likely dataless/evicted files: /Users/isaiahbrooks/Documents/NXT Level Energy (NLE)/AI/solar-dashboard-worktrees/money-tier1-r8  (RED > 5 s)
+[RED] stripe-paid-1015: git status hung (>5 s); likely dataless/evicted files: /Users/isaiahbrooks/Documents/NXT Level Energy (NLE)/AI/solar-dashboard-worktrees/stripe-paid-1015  (RED > 5 s)
+
+== Worktrees ==
+[WARN] stray file in worktrees dir: brief-wordcheck (directory that is not a git worktree)  (WARN not a git worktree)
+[WARN] stray file in worktrees dir: bundles (directory that is not a git worktree)  (WARN not a git worktree)
+[WARN] stale worktree intake-form: last commit 33 days ago  (WARN > 14 days)
+[WARN] stale worktree leg8-pricebook: last commit 33 days ago  (WARN > 14 days)
+[WARN] stale worktree lighting-fix4: last commit 15 days ago  (WARN > 14 days)
+[WARN] stale worktree lighting-fix4-mainbase: last commit 16 days ago  (WARN > 14 days)
+[WARN] stale worktree lighting-fix4-prose: last commit 16 days ago  (WARN > 14 days)
+[WARN] stale worktree lighting-fix4-r6f: last commit 15 days ago  (WARN > 14 days)
+[WARN] stale worktree lighting-fix4-review: last commit 15 days ago  (WARN > 14 days)
+[WARN] stale worktree lighting-fix4-scope: last commit 16 days ago  (WARN > 14 days)
+[WARN] stale worktree mobile-ipad-sweep: last commit 49 days ago  (WARN > 14 days)
+[WARN] stale worktree money-tier1-r8: last commit 15 days ago  (WARN > 14 days)
+[WARN] stray file in worktrees dir: ovh-leg10-payprev (directory that is not a git worktree)  (WARN not a git worktree)
+[WARN] stray file in worktrees dir: quo-allowlist-1031 (directory that is not a git worktree)  (WARN not a git worktree)
+[WARN] stray file in worktrees dir: quo-allowlist-1031 2.bundle (file)  (WARN not a git worktree)
+[WARN] stray file in worktrees dir: quo-allowlist-1031.bundle (file)  (WARN not a git worktree)
+[WARN] stray file in worktrees dir: quote-paper-link-r3 (directory that is not a git worktree)  (WARN not a git worktree)
+[WARN] stray file in worktrees dir: revise-addons (directory that is not a git worktree)  (WARN not a git worktree)
+[WARN] stray file in worktrees dir: signature-pad 2.bundle (file)  (WARN not a git worktree)
+[WARN] stray file in worktrees dir: signature-pad 3.bundle (file)  (WARN not a git worktree)
+[WARN] stray file in worktrees dir: signature-pad 4.bundle (file)  (WARN not a git worktree)
+[WARN] stray file in worktrees dir: standalone-quote (directory that is not a git worktree)  (WARN not a git worktree)
+[WARN] stale worktree stripe-paid-1015: last commit 16 days ago  (WARN > 14 days)
+[WARN] stray file in worktrees dir: stripe-paid-1015.bundle (file)  (WARN not a git worktree)
+[WARN] solar-dashboard-worktrees: 12 worktrees (25 entries, 11 stale, 13 stray)  (WARN > 8 worktrees)
+
+== Bundles ==
+[OK] 54 bundles, newest 0 h old; 165 unpushed commits  (WARN newest >= 24 h while anything unpushed)
+[OK] 7 bundles older than 30 days (cleanup candidates for the human): jedi-review-pre-overhaul-removal-2026-09-30.bundle overhaul-skill-3576e01.bundle overhaul-skill-c62498b.bundle quote-project-link-286c8418.bundle quote-project-link-337fcafa.bundle  (info only)
+
+VERDICT: RED — Memory: swap 4.0 GB of 5.0 GB used (80%) (12 red, 38 warn)
