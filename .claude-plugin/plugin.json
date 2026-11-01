@@ -1,0 +1,10 @@
+{
+  "name": "vitals",
+  "description": "One-command, read-only health snapshot of the dev machine and its git repos: disk, memory, load, iCloud-evicted files, git hangs, unpushed branches, worktree sprawl, bundle age, with a GREEN/AMBER/RED verdict.",
+  "version": "0.1.0",
+  "author": { "name": "Isaiah Brooks" },
+  "homepage": "https://github.com/zayvillion-dot/vitals",
+  "repository": "https://github.com/zayvillion-dot/vitals",
+  "license": "MIT",
+  "keywords": ["skills", "diagnostics", "macos", "git-worktrees", "icloud"]
+}

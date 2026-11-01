@@ -1,0 +1,8 @@
+{
+  "name": "vitals",
+  "description": "Marketplace for the vitals skill",
+  "owner": { "name": "Isaiah Brooks" },
+  "plugins": [
+    { "name": "vitals", "description": "One-command, read-only health snapshot of the dev machine and its git repos with a GREEN/AMBER/RED verdict", "version": "0.1.0", "source": "./", "author": { "name": "Isaiah Brooks" } }
+  ]
+}
