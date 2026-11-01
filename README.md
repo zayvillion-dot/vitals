@@ -1,5 +1,7 @@
 # Vitals
 
+![vitals](assets/social-preview.png)
+
 A Claude Code skill that takes a read-only health snapshot of the dev machine and its git repos in one command. When tests fail with odd file-read errors, the machine drags, or git hangs, the cause is usually the machine and not the code: a full disk, swap pressure, iCloud-evicted files, a stale `index.lock`, a pile of worktrees, or branches that exist only on this disk. One script checks all of it, tags each line `[OK]`, `[WARN]`, `[RED]`, or `[n/a]` with the threshold behind the tag, and ends with a `VERDICT: GREEN|AMBER|RED` line.
 
 Use it when tests fail with odd file-read errors, the machine is sluggish, git hangs, before a long build or review round, at session start, when you ask about memory, disk, storage, or usage, or when you invoke `/vitals`.
