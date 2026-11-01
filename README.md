@@ -28,45 +28,42 @@ bash ~/.claude/skills/vitals/scripts/vitals.sh [--repo <path>]... [--worktrees <
 | Flag | Effect |
 |---|---|
 | `--repo <path>` | Repo to check; repeatable. Default: the git toplevel of the current directory |
-| `--worktrees <dir>` | Worktrees directory; repeatable. Default: any `*-worktrees` directory beside the repo, plus `git worktree list` |
+| `--worktrees <dir>` | Worktrees directory; repeatable. Default: `*-worktrees` directories beside the repo. Linked worktrees from `git worktree list` are always added (not with `--quick`) |
 | `--bundles <dir>` | Git bundle directory. Default: `~/nle-bundles` if it exists |
 | `--json` | Emit JSON (no `jq` needed) |
-| `--quick` | Skip du, iCloud/dataless probes, and worktree scans; about one second |
+| `--quick` | Skip du, `brctl status`, linked worktrees, and worktree scans. Repos still get the dataless count before `git status`, so allow up to one git timeout per repo (a second or two when healthy) |
 
-Environment: `VITALS_REPOS`, `VITALS_WORKTREES`, `VITALS_BUNDLES` (colon-separated) apply when the flag is absent. `VITALS_GIT_TIMEOUT` (default 5 seconds) bounds `git status` and the dataless counts.
+Environment: `VITALS_REPOS`, `VITALS_WORKTREES`, `VITALS_BUNDLES` (colon-separated) apply when the flag is absent. `VITALS_GIT_TIMEOUT` (default 5 seconds) bounds every git call and every dataless count.
 
-A full run finishes in roughly 10 seconds or less; every blocking probe has a timeout or is stat-only. An optional `SessionStart` hook is in `skills/vitals/references/hook-snippet.md`.
+Every git call and every wait on a background probe is bounded by polling, so a child wedged in iCloud I/O is abandoned rather than waited on. The whole run has a 25-second budget: probes still pending after it print `[n/a] skipped: run budget exceeded` and the verdict still prints. A typical full run takes 10 to 15 seconds (the `du` probes have a 10-second cap). On iCloud paths (`~/Documents`, `~/Desktop`, `~/Library/Mobile Documents`) the script counts dataless files with stat-only `ls -lO` before any `git status` and skips `git status` unless the count is zero, so it never triggers a download. An optional `SessionStart` hook is in `skills/vitals/references/hook-snippet.md`.
 
-## Sample output
+## Sample output (excerpt)
 
 ```
 == Disk ==
-[OK] /System/Volumes/Data: 44.0 GB free, 80% used  (WARN <30 GB or >85% used; RED <15 GB or >92%)
+[OK] /System/Volumes/Data: 42.8 GiB free, 81% used  (WARN <30 GiB or >85% used; RED <15 GiB or >92%)
 == Memory ==
-[RED] swap 4.0 GB of 5.0 GB used (80%)  (WARN >50% used; RED >75%)
+[WARN] swap used 4.0 GB (50% of 8 GB RAM); allocated 5.0 GB (info)  (WARN used >25% of RAM; RED >50%)
 == iCloud ==
-[RED] my-repo: 45 dataless tracked files; fix: brctl download "/Users/me/Documents/my-repo"  (RED any dataless)
+[OK] stat-only dataless count on 2 iCloud targets: 1 clean, 1 with dataless files, 0 incomplete, 0 skipped (budget); per-target lines in Git  (git status runs only on a confirmed zero count)
 == Git ==
-[RED] intake-form: git status hung (>5 s); likely dataless/evicted files: /Users/me/wt/intake-form  (RED > 5 s)
+[RED] my-repo: status skipped — 45 dataless tracked files; fix: brctl download "/Users/me/Documents/my-repo"  (RED any dataless)
+[RED] intake-form: git status slow or blocked (>5 s): /Users/me/wt/intake-form  (RED > 5 s)
 [WARN] my-repo: branch feature/x has 2 unpushed commits  (WARN ahead > 0)
-== Worktrees ==
-[WARN] stale worktree old-leg: last commit 33 days ago  (WARN > 14 days)
-== Bundles ==
-[OK] 54 bundles, newest 0 h old; 3 unpushed commits  (WARN newest >= 24 h while anything unpushed)
 
-VERDICT: RED — Memory: swap 4.0 GB of 5.0 GB used (80%) (12 red, 38 warn)
+VERDICT: RED — Git: my-repo: status skipped — 45 dataless tracked files; fix: brctl download "/Users/me/Documents/my-repo" (2 red in 1 section, 2 warn)  [12 s]
 ```
 
 ## Known gaps in 0.1.0
 
-1. macOS first. Linux is best-effort: Mac-only probes (thermal, iCloud, `brctl`, `ls -O`) print `n/a`, and memory and load use `free` and `/proc`. It has had little Linux testing.
+1. macOS first. Linux is untested: Mac-only probes (thermal, iCloud, `brctl`, `ls -O`) print `n/a`, and memory and load read `/proc/meminfo`, `/proc/vmstat`, and `/proc/uptime`.
 2. No history or trending. Each run is a single snapshot; nothing is stored.
 3. Thresholds are fixed in the script. The only knob is `VITALS_GIT_TIMEOUT`.
 4. `brctl status` can take minutes, so only the first 4 seconds of its output are scanned. A blocked zone further down is missed. Zones for uninstalled apps are ignored on purpose.
-5. The dataless count covers tracked files and `.git/objects`, not untracked files or ignored directories such as `node_modules`.
-6. Git probes time out at 5 seconds by default so the run stays near 10 seconds; a very slow but healthy repo can show `git status hung`.
-7. The "no upstream" check counts commits not on any remote only for the first 40 such branches per repo.
-8. The verdict names the first RED finding in report order, not necessarily the most severe.
+5. The dataless count covers git metadata, tracked files, and the git dir's `refs` and `objects`, not untracked files or ignored directories such as `node_modules`. Resolving the repo (`git rev-parse --show-toplevel`, `git worktree list`) reads small `.git` metadata files before that count runs.
+6. Branch results are repo-wide (all worktrees share one set of branches) but are printed under the name of the first target that probed them, which can be a worktree rather than the repo.
+7. A worktree is called stale from the date of its HEAD commit, so a fresh worktree created on an old base commit reads as stale.
+8. The "no upstream" check computes commits not on any remote only for the first 40 such branches per repo; the rest show `?`.
 9. No fix is applied for you. The report prints the command; a human runs it.
 
 ## License

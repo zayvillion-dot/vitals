@@ -1,6 +1,6 @@
 # Optional SessionStart hook
 
-Off by default. Add it to `~/.claude/settings.json` to print the verdict line at the start of every session. It runs `--quick` (about a second) and keeps only the last line.
+Off by default. Add it to `~/.claude/settings.json` to print the verdict line at the start of every session. It runs `--quick` (a second or two when healthy; up to one git timeout per repo, and never past the 25-second run budget) and keeps only the last line.
 
 ```json
 {

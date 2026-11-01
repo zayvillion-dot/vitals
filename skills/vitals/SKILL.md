@@ -7,7 +7,7 @@ description: Use when tests fail with odd file-read errors, the machine feels sl
 
 ## Overview
 
-One run of `scripts/vitals.sh` replaces a dozen ad-hoc probes. Every line carries a status tag, a metric, and the threshold that produced the tag, and the last line is a verdict. The script defines the shape of the answer: report what it prints, do not improvise a different set of checks.
+One run of `scripts/vitals.sh` replaces a dozen ad-hoc probes. Every line carries a tag, a metric, and its threshold; the last line is the verdict. Report what it prints; do not improvise other checks.
 
 ## How to run
 
@@ -18,20 +18,21 @@ bash <skill-dir>/scripts/vitals.sh [flags]
 | Flag | Effect |
 |---|---|
 | `--repo <path>` | Repo to check; repeatable. Default: cwd's git toplevel |
-| `--worktrees <dir>` | Worktrees directory; repeatable. Default: `*-worktrees` beside the repo |
+| `--worktrees <dir>` | Worktrees directory; repeatable. Default: `*-worktrees` directories beside the repo. Linked worktrees from `git worktree list` are always added (not with `--quick`) |
 | `--bundles <dir>` | Bundle directory. Default: `~/nle-bundles` if present |
-| `--quick` | Skip du, iCloud, and worktree scans (about 1 s) |
+| `--quick` | Skip du, `brctl status`, linked worktrees, worktree scans; up to one git timeout per repo |
 | `--json` | Machine-readable output |
 
-Env overrides: `VITALS_REPOS`, `VITALS_WORKTREES`, `VITALS_BUNDLES` (colon-separated).
+Env overrides: `VITALS_REPOS`, `VITALS_WORKTREES`, `VITALS_BUNDLES` (colon-separated). `VITALS_GIT_TIMEOUT`: seconds per git call and dataless count (default 5). Runs cap at 25 s.
 
 ## Reading the report
 
 Tags: `[OK]`, `[WARN]`, `[RED]`, `[n/a]`. The verdict is RED if any line is RED, AMBER if any is WARN.
 
-- **Dataless files or `git status hung`**: evicted iCloud files. Give the human the printed `brctl download "<abs path>"` command.
+- **`status skipped — N dataless`**: evicted iCloud files (`git status` skipped, so nothing downloads). Give the human the printed `brctl download` command.
+- **`git status slow or blocked`** or **`dataless count incomplete`**: cause unknown; re-run before guessing.
 - **Stale `index.lock`**: confirm no git process is running, then hand removal to the human.
-- **Swap or memory RED**: name the top processes from the report; the human decides what to quit.
+- **Swap or memory RED** (swap graded as used against RAM): name the top processes; the human decides what to quit.
 - **Unpushed commits or old bundles**: bundle each branch before anything else is cleaned.
 
 Recipes, thresholds, and escalation: `references/interpretation.md`.
